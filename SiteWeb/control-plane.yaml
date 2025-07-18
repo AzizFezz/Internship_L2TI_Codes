@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: control-plane
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: control-plane
+  template:
+    metadata:
+      labels:
+        app: control-plane
+    spec:
+      containers:
+      - name: control-plane
+        image: control-plane:v3  # Image du control-plane
+        ports:
+        - containerPort: 8080  # Port utilisé par le control-plane
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: control-plane-service  # Service interne (headless)
+spec:
+  selector:
+    app: control-plane
+  ports:
+  - port: 8080  # Port du service
+    targetPort: 8080  # Port du pod
+  clusterIP: None  # Service headless

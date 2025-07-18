@@ -1,0 +1,14 @@
+{
+  "alerts": [
+    {
+      "labels": {
+        "alertname": "HighCpuUsage",
+        "pod": "application-pod",
+        "namespace": "default"
+      },
+      "annotations": {
+        "cpu_usage": "85"
+      }
+    }
+  ]
+}

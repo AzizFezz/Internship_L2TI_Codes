@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: depfog3
+  labels:
+    fogsla: ok
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        fogsla: ok
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx

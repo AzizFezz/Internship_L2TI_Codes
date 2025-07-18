@@ -1,0 +1,35 @@
+# machine-2-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sla-project-machine-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: machine-2
+  template:
+    metadata:
+      labels:
+        app: machine-2
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: minikube-m02
+      containers:
+      - name: machine-2
+        image: my-sla-server:v1
+        ports:
+        - containerPort: 8080
+        command: ["/app/server"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sla-project-machine-2-service
+spec:
+  selector:
+    app: machine-2
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

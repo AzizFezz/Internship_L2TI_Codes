@@ -1,0 +1,21 @@
+# control-plane-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sla-project-control-plane
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: control
+  template:
+    metadata:
+      labels:
+        app: control
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: minikube
+      containers:
+      - name: control
+        image: my-sla-client:v1
+        command: ["/app/client"]

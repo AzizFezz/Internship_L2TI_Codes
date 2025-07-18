@@ -1,0 +1,70 @@
+# ServiceAccount pour l'application
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: application-sa
+  namespace: default
+
+---
+# ClusterRole avec les permissions nécessaires
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: application-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "configmaps", "secrets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "replicasets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["namespaces"]
+  verbs: ["get", "list"]
+
+---
+# ClusterRoleBinding pour lier le ServiceAccount au ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: application-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: application-role
+subjects:
+- kind: ServiceAccount
+  name: application-sa
+  namespace: default
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-deployment
+  namespace: default
+  labels:
+    fogsla: ok
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cppapp
+  template:
+    metadata:
+      labels:
+        app: cppapp
+        fogsla: ok
+    spec:
+      serviceAccountName: application-sa
+      containers:
+      - name: cppapp
+        image: cpp  # ✅ Replace with the name you build
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
