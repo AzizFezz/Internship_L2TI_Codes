@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: machine-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: machine-1
+  template:
+    metadata:
+      labels:
+        app: machine-1
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: minikube-m03
+      containers:
+      - name: worker
+        image: worker-node:v1
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sla-project-machine-1-service
+spec:
+  selector:
+    app: machine-1
+  ports:
+  - port: 8080
+    targetPort: 8080
+  clusterIP: None
