@@ -1,0 +1,16 @@
+{
+  "alerts": [
+    {
+      "labels": {
+        "alertname": "HighCPUUsage",
+        "pod": "application-pod"
+      },
+      "annotations": {
+        "summary": "High CPU usage"
+      },
+      "status": "firing",
+      "startsAt": "2025-07-10T12:00:00Z"
+    }
+  ]
+}
+
