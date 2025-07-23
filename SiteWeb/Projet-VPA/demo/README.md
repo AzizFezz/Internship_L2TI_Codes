@@ -1,6 +1,3 @@
-
-Ressource: [Vertical Autoscaler (VPA) Explained — Kubernetes](https://medium.com/cloudnloud/vertical-autoscaler-vpa-explained-kubernetes-778a2f8ad668) 
-
 ### 🔧 1. Mise à jour des CRD et configuration des droits RBAC
 
 Suivre les instructions officielles ici : [Vertical Pod Autoscaler Installation](https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/docs/installation.md)
