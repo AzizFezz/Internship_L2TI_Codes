@@ -17,9 +17,7 @@ Elle reçoit des alertes Prometheus via webhook, les analyse et exécute une log
     └── asio-*/ # ASIO standalone
 ```
 
----
-
-## ⚙️ Prérequis
+## ⚙️ Prérequis
 
 - Ubuntu (testé sur 20.04+)
 - `g++-9` (support de C++17 et `string_view`)
@@ -27,8 +25,7 @@ Elle reçoit des alertes Prometheus via webhook, les analyse et exécute une log
 - Crow
 - Asio (version standalone)
 - `json.hpp` de nlohmann
-
----
+  
 
 ## 📦 Installation
 
