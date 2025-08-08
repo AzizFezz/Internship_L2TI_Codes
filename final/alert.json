@@ -2,7 +2,7 @@
   "alerts": [
     {
       "labels": {
-        "alertname": "HighCpuUsage",
+        "alertname": "PodHighCpuUsage",
         "pod": "application-pod",
         "namespace": "default"
       },
