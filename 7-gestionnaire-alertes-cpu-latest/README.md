@@ -46,7 +46,7 @@ Lorsque l’utilisation CPU d’un pod dépasse certains seuils prédéfinis, ce
 
 ```bash
 git clone https://github.com/AzizFezz/Internship_L2TI_Codes.git
-cd final
+cd 7-gestionnaire-alertes-cpu-latest
 ```
 
 2. **Installer Flask**
