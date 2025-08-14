@@ -1,11 +1,27 @@
 # 📦 Projet : Surveillance et Répartition Dynamique des Ressources dans Kubernetes
 
-Ce projet consiste à :
+**Objectif :**
+Ce projet met en œuvre un gestionnaire personnalisé pour optimiser dynamiquement les ressources CPU et mémoire des pods dans un cluster Kubernetes.
 
-- Rechercher tous les **deployments** ayant le **label `fogsla=ok`**
-- Calculer la **charge CPU du cluster**
-- Adapter dynamiquement les **limites CPU et mémoire** des containers concernés
-- Étiqueter le déploiement avec le niveau de charge (`low`, `medium`, `high`)
+**Description :**
+
+Le programme effectue les étapes suivantes :
+
+1. Recherche de tous les Deployments ayant le label fogsla=ok.
+2. Analyse des métriques CPU en temps réel.
+3. Ajustement dynamique des limites (limits) et des demandes (requests) CPU/mémoire pour chaque pod concerné.
+4. Mise à jour du label du Deployment en fonction de la charge observée :
+    - `low` → faible charge
+    - `medium` → charge modérée
+    - `high` → forte charge
+
+**Lien avec les autres projets :**
+- Ce projet est une suite directe de `3-script-extraction-labels-bash` : le script précédent permettait déjà d’extraire et de filtrer les labels des pods, et Koptim réutilise cette logique pour cibler uniquement ceux qui possèdent `fogsla=ok`.
+- Il s’inscrit aussi dans la continuité des travaux sur la communication entre pods et la collecte de métriques (netcat, Flask), car ces éléments sont essentiels pour surveiller et ajuster les ressources.
+
+**Intérêt :**
+- Offrir une solution maison d’optimisation des ressources, adaptée aux besoins spécifiques, en alternative à l’approche native de Kubernetes avec le VPA (cf. projet 4).
+- Permettre un contrôle plus précis et plus flexible que les solutions standard, en intégrant des critères métiers dans la prise de décision.
 
 ---
 
