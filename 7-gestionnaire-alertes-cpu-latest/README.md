@@ -1,8 +1,32 @@
 # ⚙️ Gestionnaire d'Alertes CPU pour Kubernetes
 
-Ce projet fournit un système automatisé pour traiter les alertes CPU dans un cluster Kubernetes à l’aide de **Prometheus**, **Alertmanager** et d’une **application Flask** personnalisée.
+**Objectif :**
+Ce projet est une version améliorée de l’analyseur-webhook-prometheus (projet 6).
+Il conserve la même logique fonctionnelle — traiter les alertes CPU envoyées par Prometheus Alertmanager — mais dans une version plus légère, fluide et intégrée.
 
-Lorsque l’utilisation CPU d’un pod dépasse certains seuils prédéfinis, ce système applique automatiquement des **labels Kubernetes** aux pods concernés. Ces labels peuvent ensuite être utilisés pour déclencher des actions correctives (scaling, éviction, alertes, etc.).
+**Améliorations clés par rapport à la version précédente :**
+
+- Remplacement de l’architecture C++/Crow par Flask pour réduire la dépendance à des frameworks externes complexes.
+- Intégration minimale de composants externes : combinaison de Flask et de petits modules C++ pour les traitements spécifiques.
+- Meilleure performance et maintenabilité du code.
+
+**Seuils de déclenchement :**
+
+- `CPU élevé` → Label de niveau critique
+- `CPU modéré` → Label d’alerte intermédiaire
+- `CPU faible` → Label d’état normal
+
+**Lien avec les autres projets :**
+
+- Ce module représente l’aboutissement de toute la chaîne expérimentée dans les projets précédents.
+- Il succède à 6-analyseur-webhook-prometheus en étant plus optimisé et simple à déployer.
+- C’est la version finale intégrée dans notre application complète, combinant monitoring, alerting, et réponse automatique.
+
+**Intérêt :**
+
+- Plus rapide à mettre en place et à maintenir.
+- Compatible avec un déploiement continu dans Kubernetes sans nécessiter un environnement C++ lourd.
+- Constitue la brique finale de notre système de surveillance et de gestion intelligente des ressources CPU.
 
 ---
 
@@ -122,7 +146,5 @@ Cela permet aux autres outils du cluster de détecter automatiquement l’état 
 ## 📌 Remarques
 
     - L’application Flask doit être accessible par Alertmanager (modifier l'adresse ip de l'application flask dans le script de Alertmanager).
-
     - Assurez-vous que le port Flask (5000) est ouvert si vous exécutez l'app dans un pod Kubernetes.
-
     - kubectl doit être configuré avec les bons accès pour modifier les pods.
