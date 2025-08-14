@@ -1,3 +1,27 @@
+# Test de Vertical Pod Autoscaler (VPA)
+
+**Objectif :**
+Ce projet explore une fonctionnalité native de Kubernetes : le Vertical Pod Autoscaler (VPA), qui permet d’ajuster automatiquement les ressources CPU et mémoire d’un pod en fonction de sa charge réelle.
+
+**Description :**
+
+L’expérience consistait à :
+- Déployer un pod configuré pour surcharger son CPU toutes les 0,5 secondes.
+- Activer un VPA en arrière-plan, en mode Auto, pour surveiller les pods via le Metrics Server.
+- Observer le redimensionnement automatique : le VPA crée un nouveau pod avec plus de ressources, puis supprime l’ancien.
+
+**Lien avec les autres projets :**
+
+Bien que ce projet soit indépendant des autres, il est très proche conceptuellement de Koptim, car il repose également sur une logique de scaling vertical.
+- Dans Koptim, l’adaptation des ressources se fait via un script maison appliquant un patch Kubernetes aux pods sélectionnés (ex. fogsla=ok).
+- Ici, c’est Kubernetes qui gère automatiquement le dimensionnement grâce au VPA.
+
+**Intérêt :**
+- Permet de découvrir et tester une fonctionnalité Kubernetes prête à l’emploi pour l’optimisation des ressources.
+- Sert de référence pour comparer une approche native (VPA) à une approche personnalisée comme celle de Koptim.
+
+---
+
 ### 🔧 1. Mise à jour des CRD et configuration des droits RBAC
 
 Suivre les instructions officielles ici : [Vertical Pod Autoscaler Installation](https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/docs/installation.md)
