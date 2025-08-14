@@ -1,11 +1,29 @@
 # ⚙️ Script d’extraction de labels : conception, test et déploiement
 
-Ce projet propose un **script Bash avancé** permettant d’extraire automatiquement les **labels de tous les pods** dans **tous les namespaces** d’un cluster Kubernetes, et de les enregistrer dans un fichier lisible.
+**Objectif :**
+Ce projet propose un script Bash avancé permettant d’extraire automatiquement les labels de tous les pods dans tous les namespaces d’un cluster Kubernetes, et de les enregistrer dans un fichier texte lisible.
 
-Contrairement à une version plus simple qui ne récupérait qu’une seule ligne de labels pour un seul pod, ce script prend en compte :
-- Tous les **namespaces**
-- Tous les **pods**
-- Tous leurs **labels**
+**Améliorations par rapport à la version simple précédente :**
+
+- Prise en compte de tous les namespaces.
+- Récupération de tous les pods présents dans le cluster.
+- Extraction de tous les labels associés à chaque pod.
+
+**Solution mise en œuvre :**
+
+- Script exécuté dans un conteneur Docker léger intégrant kubectl.
+- Export des labels dans un fichier /tmp/labels.txt facilement consultable.
+- Déploiement automatisé via YAML Kubernetes avec les droits nécessaires (RBAC).
+
+**Lien avec la suite du projet :**
+
+Ce module a été conçu comme une brique réutilisable pour des projets ultérieurs, notamment Koptim.
+Dans Koptim, ce script servira à identifier les pods ayant un label spécifique (fogsla=ok) afin de leur appliquer un patch Kubernetes adapté à leur usage de CPU et mémoire.
+
+**Intérêt :**
+
+- Permet d’automatiser la collecte d’informations sur les pods.
+- Sert de fondation à des mécanismes de supervision et d’optimisation des ressources dans Kubernetes.
 
 ---
 
