@@ -1,8 +1,30 @@
 # 🦅 Récepteur Webhook Prometheus en C++ avec Crow et JSON
 
-Ce projet est une application C++ simple basée sur [Crow](https://github.com/CrowCpp/crow), un micro-framework HTTP pour C++ (similaire à Flask), et la bibliothèque [nlohmann/json](https://github.com/nlohmann/json) pour le traitement de JSON.  
-Elle reçoit des alertes Prometheus via webhook, les analyse et exécute une logique (par exemple, étiqueter des pods Kubernetes).
+**Objectif :**
+Ce projet constitue notre première tentative d’intégration avec Prometheus et Alertmanager, dans le but de traiter automatiquement les alertes et d’adapter l’état des pods Kubernetes en fonction de l’utilisation CPU.
 
+**Description :**
+
+- Développée en C++ avec le micro-framework Crow (équivalent de Flask pour C++) et la bibliothèque nlohmann/json pour la gestion du JSON.
+- L’application reçoit des alertes envoyées par Prometheus Alertmanager via un webhook HTTP.
+- Chaque alerte est analysée pour en extraire la métrique CPU, puis traduite en un ensemble de labels à appliquer.
+
+**Logique d’attribution des labels :**
+
+- `R3 / S1` → CPU très élevé
+- `R2 / S2` → CPU modéré
+- `R1 / S3` → CPU faible
+
+**Lien avec les autres projets :**
+
+- Ce module prépare le terrain pour un système complet de gestion proactive des ressources.
+- Il se place comme point d’entrée de la chaîne de traitement : Prometheus détecte une anomalie, l’analyseur attribue les labels, puis des outils comme Koptim (projet 5) peuvent agir pour ajuster les ressources.
+- C’est également une étape clé vers un écosystème intégré combinant monitoring (Prometheus), alerting (Alertmanager) et orchestration (Kubernetes).
+
+**Intérêt :**
+
+- Démonstration de l’intégration de composants observabilité avec la prise de décision automatique.
+- Fournit un socle réutilisable pour d’autres types d’alertes (ex. mémoire, latence, I/O).
 ---
 
 ## 📁 Structure du projet
