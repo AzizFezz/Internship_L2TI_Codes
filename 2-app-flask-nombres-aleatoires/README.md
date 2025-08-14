@@ -1,17 +1,34 @@
 # 🔢 Application Web de Génération et d’Affichage de Nombres aléatoires (Flask + Kubernetes)
 
-Ce projet illustre une **application web distribuée** en architecture **client-serveur**, déployée dans un cluster **Kubernetes**. Il est basé sur **Flask**, avec un **control-plane** qui génère des nombres aléatoires et les envoie à des **workers** qui les affichent en temps réel via une page web.
+**Objectif :**
+Ce projet illustre une application web distribuée en architecture client-serveur, déployée dans un cluster Kubernetes.
+
+Il repose sur Flask, avec :
+- Un Control-Plane qui génère des nombres aléatoires.
+- Un ou plusieurs Workers qui reçoivent ces nombres et les affichent en temps réel via une interface web.
+
+**Pourquoi Flask ?**
+
+Après les limitations rencontrées avec netcat (connexion interrompue après chaque envoi), nous avons décidé de passer à Flask afin de :
+- Maintenir une communication continue entre control-plane et workers.
+- Offrir un affichage plus ergonomique et dynamique grâce à une page web générée côté worker.
+- Simplifier la mise en forme et l’actualisation des données reçues.
+
+**Solution mise en œuvre :**
+- Développement d’un service Flask côté worker affichant les nombres en temps réel.
+- Déploiement d’un service Flask côté control-plane chargé d’envoyer périodiquement les nombres.
+- Utilisation de Docker pour empaqueter les deux rôles (control-plane et worker).
+- Chargement des images dans Minikube puis déploiement via YAML Kubernetes.
+
+**Intérêt pour la suite du projet :**
+
+- Mise en place d’une base solide pour la transmission continue de métriques entre pods.
+- Possibilité d’adapter ce système pour l’envoi de données de supervision ou d’alertes.
+- Première étape vers l’intégration avec des outils comme Prometheus et Alertmanager.
 
 ---
 
-## 🧱 Architecture
-
-- 🎛️ **Control Plane (Serveur)** : Génère des nombres aléatoires et les envoie périodiquement aux workers via TCP.
-- 🖥️ **Workers (Clients)** : Reçoivent les nombres, les stockent localement, et les affichent dans une interface web Flask.
-
----
-
-🚀 Déploiement avec Minikube
+## 🚀 Déploiement avec Minikube
 1. Construire les images Docker
 
 Dans le dossier du control-plane
