@@ -1,7 +1,26 @@
-# ⚙️ Déploiement d’un Système Control-Plane / Worker sur Kubernetes
+# ⚙️ Générateur de nombres aléatoires entre Control Plane et Worker Node (netcat)
 
-Ce projet repose sur une architecture **control-plane / worker**.  
-L’objectif est de construire deux images Docker (une pour le control-plane et une pour les workers), de les charger dans **Minikube**, puis de déployer le tout à l’aide de fichiers YAML.
+**Objectif :**
+Ce premier projet sert de preuve de concept pour vérifier la faisabilité d’une communication inter-Pods dans Kubernetes.
+Dans un contexte de supervision et de gestion de ressources, il est indispensable que les différents composants puissent échanger alertes et métriques en temps réel.
+
+**Problème :**
+Comment établir un canal de communication fiable entre un pod Control-Plane et un ou plusieurs pods Workers dans Kubernetes, sans utiliser d’outils complexes au départ ?
+
+**Solution mise en œuvre :**
+- Création de deux images Docker :
+   - Control-Plane : génère périodiquement un nombre aléatoire et l’envoie aux workers.
+   - Worker : reçoit le nombre et l’affiche.
+- Utilisation de Minikube pour simuler le cluster Kubernetes.
+- Communication testée pour valider le réseau interne entre pods.
+
+**Intérêt pour la suite du projet :**
+
+Cette étape a permis de valider la communication inter-Pods, ce qui est la base pour :
+- Envoyer des alertes CPU/Mémoire.
+- Transmettre des métriques à un système de supervision (Prometheus, Alertmanager).
+- Implémenter une logique de traitement distribué.
+
 
 ---
 
