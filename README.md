@@ -9,7 +9,7 @@ Chaque projet correspond à une étape clé dans notre réflexion et nos expéri
 
 - D’abord, mettre en place la communication entre pods.
 - Ensuite, améliorer l’affichage et la collecte d’informations.
-- Puis, développer des modules capables de détecter des conditions de charge (par exemple : CPU élevé entre 66 % et 100 %, CPU modéré entre 33 % et 66 %, CPU faible entre 0 % et 33 %) et d’agir automatiquement sur les ressources du cluster.
+- Puis, développer des modules capables de détecter des conditions de charge CPU (par exemple : CPU élevé entre 66 % et 100 %, CPU modéré entre 33 % et 66 %, CPU faible entre 0 % et 33 %) et d’agir automatiquement sur les ressources du cluster.
 
 L’objectif final est de disposer d’un système léger, modulaire et automatisé, capable de :
 
