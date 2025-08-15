@@ -1,13 +1,15 @@
 # 📦 Système de surveillance et de gestion automatisée des ressources Kubernetes
 ## 📖 Présentation générale
 
-Ce dépôt regroupe huit projets successifs qui illustrent l’évolution d’un système complet de surveillance, analyse et réponse automatique aux conditions de charge CPU dans un cluster Kubernetes.
+Ce dépôt regroupe huit projets successifs qui illustrent l’évolution d’un système complet de surveillance, d’analyse et de réponse automatique aux conditions de charge CPU dans un cluster Kubernetes.
+
+Ce travail s’inspire de **Koptim**, un framework avancé d’optimisation de ressources pour Kubernetes. **Koptim** propose une approche innovante de la gestion des ressources basée sur des classes SLA (Service Level Agreement) et un algorithme d’aide à la décision multicritère. L’objectif est de simplifier le paramétrage des ressources CPU, mémoire et stockage pour différents niveaux de qualité de service, tout en optimisant automatiquement l’allocation et l’adaptation des ressources en fonction de la charge réelle des pods. Notre projet reprend certains de ces principes pour mettre en place un système modulaire capable de détecter les niveaux de charge et d’agir en conséquence.
 
 Chaque projet correspond à une étape clé dans notre réflexion et nos expérimentations :
 
 - D’abord, mettre en place la communication entre pods.
 - Ensuite, améliorer l’affichage et la collecte d’informations.
-- Puis, développer des modules capables de détecter des conditions (métriques CPU, labels Kubernetes) et d’agir automatiquement sur les ressources du cluster.
+- Puis, développer des modules capables de détecter des conditions de charge (par exemple : CPU élevé entre 66 % et 100 %, CPU modéré entre 33 % et 66 %, CPU faible entre 0 % et 33 %) et d’agir automatiquement sur les ressources du cluster.
 
 L’objectif final est de disposer d’un système léger, modulaire et automatisé, capable de :
 
@@ -46,10 +48,12 @@ L’objectif final est de disposer d’un système léger, modulaire et automati
 
     - Intégration avec Prometheus et Alertmanager via un webhook en C++.
     - Attribution de labels automatiques selon l’utilisation CPU.
+    - Peuvent être appliqué à n’importe quel pod dans le cluster.
 **7-gestionnaire-alertes-cpu-latest**
 
     - Version optimisée et finale en Flask (plus légère et fluide).
     - Applique automatiquement des labels aux pods selon leur CPU, utilisable sur n’importe quel pod du cluster.
+    - Peuvent être appliqué à n’importe quel pod dans le cluster.
 
 ---
 ## ⚙️ Environnement requis
@@ -77,11 +81,14 @@ sudo usermod -aG docker $USER
 newgrp docker
 
 # Installer Minikube
+sudo apt install curl -y
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
 # Installer Kubectl
-sudo snap install kubectl --classic
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
 
 # Lancer un cluster Kubernetes 3 nœuds avec Docker comme driver et sans vérification VT-x
 minikube start --nodes 3 --driver=docker --no-vtx-check
