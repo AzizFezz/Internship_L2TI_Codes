@@ -1,4 +1,4 @@
-# 📦 Système de Surveillance et de Gestion Automatisée des Ressources Kubernetes
+# 📦 Système de surveillance et de gestion automatisée des ressources Kubernetes
 ## 📖 Présentation générale
 
 Ce dépôt regroupe huit projets successifs qui illustrent l’évolution d’un système complet de surveillance, analyse et réponse automatique aux conditions de charge CPU dans un cluster Kubernetes.
