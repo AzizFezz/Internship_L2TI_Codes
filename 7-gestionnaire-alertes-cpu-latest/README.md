@@ -1,4 +1,4 @@
-# ⚙️ Gestionnaire d'Alertes CPU pour Kubernetes
+# ⚙️ Gestionnaire d'alertes CPU pour Kubernetes
 
 **Objectif :**
 Ce projet est une version améliorée de l’analyseur-webhook-prometheus (projet 6).
