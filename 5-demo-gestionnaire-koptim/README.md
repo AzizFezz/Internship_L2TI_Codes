@@ -1,4 +1,4 @@
-# 📦 Projet : Surveillance et Répartition Dynamique des Ressources dans Kubernetes
+# 📦 Projet : surveillance et répartition dynamique des ressources dans Kubernetes
 
 **Objectif :**
 Ce projet met en œuvre un gestionnaire personnalisé pour optimiser dynamiquement les ressources CPU et mémoire des pods dans un cluster Kubernetes.
